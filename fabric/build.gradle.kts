@@ -1,4 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     id("dev.architectury.loom")
     id("architectury-plugin")
@@ -37,7 +36,7 @@ dependencies {
     shadowCommon("net.kyori:adventure-text-minimessage:${property("minimessage_version")}")
     shadowCommon("net.kyori:adventure-text-serializer-gson:${property("minimessage_version")}")
 
-    modImplementation("com.cobblemon:fabric:1.3.1+1.19.2-SNAPSHOT") { isTransitive = false }
+    modImplementation("com.cobblemon:fabric:1.4.0+1.20.1-SNAPSHOT") { isTransitive = false }
     shadowCommon(project(":common", configuration = "transformProductionFabric"))
 }
 
