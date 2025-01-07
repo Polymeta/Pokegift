@@ -10,6 +10,7 @@ import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -53,39 +54,39 @@ public class BaseConfig {
                     Placeholder.unparsed("pokemon", pokemon.getDisplayName().getString()),
                     Placeholder.unparsed("player", targetPlayer.getName().getString()));
 
-            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text));
+            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text), targetPlayer.registryAccess());
         }
 
-        public Component cooldownFeedback() {
+        public Component cooldownFeedback(RegistryAccess registryAccess) {
             var text = Pokegift.miniMessage.deserialize(this.cooldownFeedback);
-            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text));
+            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text), registryAccess);
         }
 
-        public Component successFeedback() {
+        public Component successFeedback(RegistryAccess registryAccess) {
             var text = Pokegift.miniMessage.deserialize(this.successFeedback);
-            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text));
+            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text), registryAccess);
         }
 
-        public Component pokemonNotAllowed() {
+        public Component pokemonNotAllowed(RegistryAccess registryAccess) {
             var text = Pokegift.miniMessage.deserialize(this.pokemonNotAllowed);
-            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text));
+            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text), registryAccess);
         }
 
-        public Component errorCantGiftYourself() {
+        public Component errorCantGiftYourself(RegistryAccess registryAccess) {
             var text = Pokegift.miniMessage.deserialize(this.errorCantGiftYourself);
-            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text));
+            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text), registryAccess);
         }
 
-        public Component errorCouldntTakePokemon() {
+        public Component errorCouldntTakePokemon(RegistryAccess registryAccess) {
             var text = Pokegift.miniMessage.deserialize(this.errorCouldntTakePokemon);
-            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text));
+            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text), registryAccess);
         }
 
         public Component errorCouldntGivePokemon(ServerPlayer targetPlayer) {
             var text = Pokegift.miniMessage.deserialize(this.errorCouldntGivePokemon,
                     Placeholder.unparsed("player", targetPlayer.getName().getString()));
 
-            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text));
+            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text), targetPlayer.registryAccess());
         }
 
         public Component receivedPokemonFeedback(ServerPlayer player, Pokemon pokemon) {
@@ -94,7 +95,7 @@ public class BaseConfig {
                     Placeholder.unparsed("pokemon", pokemon.getDisplayName().getString())
             );
 
-            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text));
+            return Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(text), player.registryAccess());
         }
     }
 }

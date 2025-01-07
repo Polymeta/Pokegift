@@ -1,7 +1,7 @@
 plugins {
     id("dev.architectury.loom")
     id("architectury-plugin")
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 architectury {
@@ -27,6 +27,7 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("fabric_loader_version")}")
 
     modRuntimeOnly("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
+    modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin")}")
     modRuntimeOnly("dev.architectury", "architectury-fabric", property("architectury_version").toString()) { isTransitive = false }
     implementation(project(":common", configuration = "namedElements"))
     "developmentFabric"(project(":common", configuration = "namedElements"))
@@ -36,7 +37,7 @@ dependencies {
     shadowCommon("net.kyori:adventure-text-minimessage:${property("minimessage_version")}")
     shadowCommon("net.kyori:adventure-text-serializer-gson:${property("minimessage_version")}")
 
-    modImplementation("com.cobblemon:fabric:1.4.0+1.20.1-SNAPSHOT") { isTransitive = false }
+    modImplementation("com.cobblemon:fabric:${property("cobblemon_version")}") { isTransitive = false }
     shadowCommon(project(":common", configuration = "transformProductionFabric"))
 }
 

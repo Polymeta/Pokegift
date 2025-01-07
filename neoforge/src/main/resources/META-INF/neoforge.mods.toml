@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[43,)"
+loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/Polymeta/Pokegift/issues"
 license = "MIT License"
 
@@ -14,29 +14,29 @@ Gift your pokemon to players!
 #logoFile = ""
 
 [[dependencies.pokegift]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[47,)"
+versionRange = "[21.1.66,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.pokegift]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.1,)"
+versionRange = "[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.pokegift]]
 modId = "architectury"
 mandatory = true
-versionRange = "[9.1.12,)"
+versionRange = "[13.0.6,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.pokegift]]
 modId = "cobblemon"
 mandatory = true
-versionRange = "[1.4.0,)"
+versionRange = "[1.6.0,)"
 ordering = "AFTER"
 side = "BOTH"

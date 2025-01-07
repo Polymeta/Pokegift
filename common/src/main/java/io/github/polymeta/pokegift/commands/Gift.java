@@ -42,7 +42,7 @@ public class Gift {
         var player = context.getSource().getPlayerOrException();
         var targetPlayer = EntityArgument.getPlayer(context, "player");
         if(player.getUUID().equals(targetPlayer.getUUID())) {
-            player.sendSystemMessage(Pokegift.config.messages.errorCantGiftYourself());
+            player.sendSystemMessage(Pokegift.config.messages.errorCantGiftYourself(player.registryAccess()));
             return Command.SINGLE_SUCCESS;
         }
         var slotNo = ((PartyPosition)slot.getStoreCoordinates().get().getPosition()).getSlot();
@@ -50,11 +50,11 @@ public class Gift {
                 new CobblemonPermission("pokegift.command.gift.bypass",
                         PermissionLevel.CHEAT_COMMANDS_AND_COMMAND_BLOCKS));
         if(playersOnCooldown.contains(player.getUUID()) && !canBypass && Pokegift.config.cooldownEnabled) {
-            player.sendSystemMessage(Pokegift.config.messages.cooldownFeedback());
+            player.sendSystemMessage(Pokegift.config.messages.cooldownFeedback(player.registryAccess()));
             return Command.SINGLE_SUCCESS;
         }
         if(isPokemonForbidden(slot) && !canBypass) {
-            player.sendSystemMessage(Pokegift.config.messages.pokemonNotAllowed());
+            player.sendSystemMessage(Pokegift.config.messages.pokemonNotAllowed(player.registryAccess()));
             return Command.SINGLE_SUCCESS;
         }
         player.sendSystemMessage(Pokegift.config.messages.pokegiftFeedback(slot, slotNo, targetPlayer));
@@ -71,18 +71,18 @@ public class Gift {
         var player = context.getSource().getPlayerOrException();
         var targetPlayer = EntityArgument.getPlayer(context, "player");
         if(player.getUUID().equals(targetPlayer.getUUID())) {
-            player.sendSystemMessage(Pokegift.config.messages.errorCantGiftYourself());
+            player.sendSystemMessage(Pokegift.config.messages.errorCantGiftYourself(player.registryAccess()));
             return Command.SINGLE_SUCCESS;
         }
         var canBypass = Cobblemon.INSTANCE.getPermissionValidator().hasPermission(player,
                 new CobblemonPermission("pokegift.command.gift.bypass",
                         PermissionLevel.CHEAT_COMMANDS_AND_COMMAND_BLOCKS));
         if(playersOnCooldown.contains(player.getUUID()) && !canBypass && Pokegift.config.cooldownEnabled) {
-            player.sendSystemMessage(Pokegift.config.messages.cooldownFeedback());
+            player.sendSystemMessage(Pokegift.config.messages.cooldownFeedback(player.registryAccess()));
             return Command.SINGLE_SUCCESS;
         }
         if(isPokemonForbidden(slot) && !canBypass) {
-            player.sendSystemMessage(Pokegift.config.messages.pokemonNotAllowed());
+            player.sendSystemMessage(Pokegift.config.messages.pokemonNotAllowed(player.registryAccess()));
             return Command.SINGLE_SUCCESS;
         }
         var playerParty = Cobblemon.INSTANCE.getStorage().getParty(player);
@@ -95,7 +95,7 @@ public class Gift {
             }
         }
         else {
-            player.sendSystemMessage(Pokegift.config.messages.errorCouldntTakePokemon());
+            player.sendSystemMessage(Pokegift.config.messages.errorCouldntTakePokemon(player.registryAccess()));
             return Command.SINGLE_SUCCESS;
         }
 
@@ -103,7 +103,7 @@ public class Gift {
             playersOnCooldown.add(player.getUUID());
             Pokegift.scheduler.schedule(() -> {playersOnCooldown.remove(player.getUUID());}, Pokegift.config.cooldown, TimeUnit.MINUTES);
         }
-        player.sendSystemMessage(Pokegift.config.messages.successFeedback());
+        player.sendSystemMessage(Pokegift.config.messages.successFeedback(player.registryAccess()));
         targetPlayer.sendSystemMessage(Pokegift.config.messages.receivedPokemonFeedback(player, slot));
         return Command.SINGLE_SUCCESS;
     };
