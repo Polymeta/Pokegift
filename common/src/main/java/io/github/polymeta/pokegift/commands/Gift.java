@@ -114,7 +114,7 @@ public class Gift {
                 return true;
             }
         }
-        return pokemon.getTradeable();
+        return !pokemon.getTradeable();
     }
 
 }
